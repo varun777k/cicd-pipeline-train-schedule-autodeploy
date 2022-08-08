@@ -27,7 +27,7 @@ pipeline {
             
             steps {
                 script {
-                    docker.withRegistry('https://hub.docker.com', 'varunk777/cicdproject') {
+                    docker.withRegistry('https://hub.docker.com', 'varunk777') {
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
                     }
