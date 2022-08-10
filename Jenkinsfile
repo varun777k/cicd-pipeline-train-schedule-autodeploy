@@ -44,11 +44,14 @@ pipeline {
                 CANARY_REPLICAS = 1
             }
             steps {
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube-canary.yml',
-                    enableConfigSubstitution: true
-                )
+                step([$class: 'KubernetesEngineBuilder', 
+                        projectId: env.PROJECT_ID,
+                        clusterName: env.CLUSTER_NAME,
+                        zone: env.LOCATION,
+                        manifestPattern: 'cicd-pipeline-train-schedule-autodeploy/train-schedule-kube-canary.yml',
+                        credentialsId: env.CREDENTIALS_ID,
+                        verifyDeployments: true])
+                
             }
         }
         stage('DeployToProduction') {
