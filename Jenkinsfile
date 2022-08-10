@@ -3,6 +3,10 @@ pipeline {
     environment {
         //be sure to replace "bhavukm" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "varunk777/train-schedule"
+        PROJECT_ID = 'intrepid-fiber-355806'
+        CLUSTER_NAME = 'edureka'
+        LOCATION = 'us-central1-c'
+        CREDENTIALS_ID = 'kubernetes'
     }
     stages {
         stage('Build') {
