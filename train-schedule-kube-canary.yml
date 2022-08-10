@@ -10,7 +10,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8080
-    nodePort: 8081
+    nodePort: 31000
 
 ---
 
@@ -21,7 +21,7 @@ metadata:
   labels:
     app: train-schedule
 spec:
-  replicas: $CANARY_REPLICAS
+  replicas: 1
   selector:
     matchLabels:
       app: train-schedule
