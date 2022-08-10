@@ -60,18 +60,13 @@ pipeline {
                 CANARY_REPLICAS = 0
             }
             steps {
-                input 'Deploy to Production?'
-                milestone(1)
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube-canary.yml',
-                    enableConfigSubstitution: true
-                )
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube.yml',
-                    enableConfigSubstitution: true
-                )
+                step([$class: 'KubernetesEngineBuilder', 
+                        projectId: env.PROJECT_ID,
+                        clusterName: env.CLUSTER_NAME,
+                        zone: env.LOCATION,
+                        manifestPattern: 'cicd-pipeline-train-schedule-autodeploy/train-schedule-kube.yml',
+                        credentialsId: env.CREDENTIALS_ID,
+                        verifyDeployments: true])
             }
         }
     }
