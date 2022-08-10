@@ -64,7 +64,7 @@ pipeline {
                         projectId: env.PROJECT_ID,
                         clusterName: env.CLUSTER_NAME,
                         zone: env.LOCATION,
-                        manifestPattern: 'cicd-pipeline-train-schedule-autodeploy/train-schedule-kube.yml',
+                        manifestPattern: 'train-schedule-kube.yml',
                         credentialsId: env.CREDENTIALS_ID,
                         verifyDeployments: true])
             }
